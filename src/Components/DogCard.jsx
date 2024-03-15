@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import BreedInfo from "./BreedInfo";
 
 const DogCard = () => {
   const [dogData, setDogData] = useState([]);
   const subId = "randomUser1"
+  const [breedInfo, setBreedInfo] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -19,6 +21,10 @@ const DogCard = () => {
     .then(response => setDogData(response.data))
     .catch(error => console.error("Error during fetching:", error));
   };
+
+  const dogRefresh = () => {
+    fetchData();
+  }
 
   const onClickAdd = (event, dogId) => {
     event.preventDefault();
@@ -38,16 +44,29 @@ const DogCard = () => {
     .catch(error => console.error("Error while adding to favorites:", error));
   };
 
+  const onClickShowInfo = (breeds) => {
+    setBreedInfo(breeds);
+  };
+
   return (
-    <div className="image-grid">
-      {dogData.map((dog) => (
-        <div key={dog.id} className="image-button-pair">
-          <img className="grid-image" src={dog.url} alt="dog" />
-          <button className="grid-button" onClick={event => onClickAdd(event, dog.id)}>
-            <span>Favorite</span>
-          </button>
-        </div>
-      ))}
+    <div>
+      <div className="image-grid">
+        {dogData.map((dog) => (
+          <div key={dog.id} className="image-button-pair">
+            <img className="grid-image" src={dog.url} alt="dog" />
+            <div className="dog-buttons">
+              <button className="grid-button" onClick={event => onClickAdd(event, dog.id)}>
+                <span>Favorite</span>
+              </button>
+              <button className="grid-button" onClick={() => onClickShowInfo(dog.breeds)}>
+                <span>Dog Info</span>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+      <button onClick={dogRefresh}>I want more random Dogs</button>
+      {breedInfo && <BreedInfo breedInfo={breedInfo} />}
     </div>
   );
 };

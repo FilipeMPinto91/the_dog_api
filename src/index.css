@@ -31,17 +31,29 @@ body {
   padding: 20px;
 }
 
+.image-button-pair{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dog-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .image-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
 }
 
 .grid-image {
   width: 100%;
-  height: auto;
+  height: 200px;
   border-radius: 5px;
 }
 
@@ -52,4 +64,10 @@ body {
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 5px;
+  margin: 5px;
+}
+
+.input-bar {
+  margin: 5px;
+  text-align: center;
 }

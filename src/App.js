@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import { NavBar } from './Components/NavBar';
 import Favorites from './Pages/Favorites';
-import FakeAuthPage from './Pages/FakeAuthPage';
+import FakeAuthPage from './Pages/AuthPage';
 
 const App = () => {
   return (
