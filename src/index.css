@@ -59,9 +59,10 @@ body {
 
 .grid-button {
   background-color: #333; 
+  width: 100px;
+  height: 35px;
   color: #fff; 
   border: none;
-  padding: 10px 20px;
   cursor: pointer;
   border-radius: 5px;
   margin: 5px;
@@ -70,4 +71,14 @@ body {
 .input-bar {
   margin: 5px;
   text-align: center;
+}
+
+@media only screen and (max-width: 700px) {
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+  }
 }

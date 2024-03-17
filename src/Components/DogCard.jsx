@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BreedInfo from "./BreedInfo";
 
-const DogCard = () => {
+const DogCard = ({selectedBreedId}) => {
   const [dogData, setDogData] = useState([]);
   const subId = "randomUser1"
   const [breedInfo, setBreedInfo] = useState(null);
+  const [favoriteStatus, setFavoriteStatus] = useState({});
 
   useEffect(() => {
     fetchData();
@@ -33,7 +34,13 @@ const DogCard = () => {
       image_id: dogId,
       sub_id: subId,
     };
-  
+
+    setFavoriteStatus(prevState => ({
+      ...prevState,
+      [dogId]: true
+    }));
+    console.log(dogId);
+
     axios.post("https://api.thedogapi.com/v1/favourites", data, {
       headers: {
         "Content-Type": 'application/json',
@@ -43,6 +50,8 @@ const DogCard = () => {
     .then(response => console.log(response))
     .catch(error => console.error("Error while adding to favorites:", error));
   };
+
+  console.table(favoriteStatus);
 
   const onClickShowInfo = (breeds) => {
     setBreedInfo(breeds);
@@ -55,11 +64,15 @@ const DogCard = () => {
           <div key={dog.id} className="image-button-pair">
             <img className="grid-image" src={dog.url} alt="dog" />
             <div className="dog-buttons">
-              <button className="grid-button" onClick={event => onClickAdd(event, dog.id)}>
-                <span>Favorite</span>
+              <button 
+                className="grid-button" 
+                onClick={event => onClickAdd(event, dog.id)}
+                disabled={favoriteStatus[dog.id]}
+              >
+                <span>{favoriteStatus[dog.id] ? '❤️' : 'Favorite'}</span>
               </button>
               <button className="grid-button" onClick={() => onClickShowInfo(dog.breeds)}>
-                <span>Dog Info</span>
+                <span>Breed Info</span>
               </button>
             </div>
           </div>
