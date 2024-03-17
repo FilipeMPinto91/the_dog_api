@@ -39,11 +39,15 @@ const SearchBar = ({ onSelectBreed }) => {
         value={searchTerm}
         onChange={handleInputChange}
       />
-      {filteredBreeds.slice(0, 10).map(breed => (
-        <div key={breed.id} onClick={() => handleSelectBreed(breed.id)}>
-          {breed.name}
+      {searchTerm && (
+        <div>
+          {filteredBreeds.slice(0, 10).map(breed => (
+            <div key={breed.id} onClick={() => handleSelectBreed(breed.id)}>
+              {breed.name}
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 };
