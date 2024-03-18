@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import BreedInfo from "./BreedInfo";
+import {DogDataContext} from './context/DogDataContext'
 
-const DogCard = ({selectedBreedId}) => {
-  const [dogData, setDogData] = useState([]);
+const DogCard = () => {
+  // const [dogData, setDogData] = useState([]);
   const subId = "randomUser1"
   const [breedInfo, setBreedInfo] = useState(null);
   const [favoriteStatus, setFavoriteStatus] = useState({});
+  const {dogData, setDogData} = useContext(DogDataContext);
 
   useEffect(() => {
     fetchData();

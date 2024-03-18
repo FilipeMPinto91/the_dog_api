@@ -4,17 +4,20 @@ import Home from './Pages/Home';
 import { NavBar } from './Components/NavBar';
 import Favorites from './Pages/Favorites';
 import FakeAuthPage from './Pages/AuthPage';
+import { DogDataProvider } from './Components/context/DogDataContext';
 
 const App = () => {
   return (
-    <Router>
+    <DogDataProvider>
+      <Router>
         <NavBar/>
         <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/favorites' element={<Favorites/>} />
+            <Route path='/' element={<Home/>} />
+            <Route path='/favorites' element={<Favorites/>} />
           <Route path='/authentication' element={<FakeAuthPage/>}/>
         </Routes>
-    </Router>
+      </Router>
+    </DogDataProvider>
   )
 }
 
