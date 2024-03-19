@@ -31,7 +31,7 @@ const SearchBar = ({ onSelectBreed }) => {
   };
 
   return (
-    <div>
+    <div className='search-container'>
       <input
         type="text"
         placeholder="Search for dogs"

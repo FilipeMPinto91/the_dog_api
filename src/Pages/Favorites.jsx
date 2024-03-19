@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+// import { useSubId } from "../Components/context/SubIdContext";
 
 export const Favorites = () => {
   const [favorites, setFavorites] = useState(null);
-  const subId = "randomUser1"
+  const subId = 'randomuser1'
+  // const {subId} = useSubId();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,7 +57,7 @@ export const Favorites = () => {
           <div key={favorite.id} className="image-button-pair">
             <img className="grid-image" src={favorite.image.url} alt="dog" />
             <button className="grid-button" onClick={event => onClickRemove(event, favorite.id)}>
-              Remove
+              Remove 😭
             </button>
           </div>
         ))}

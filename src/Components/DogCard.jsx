@@ -2,17 +2,22 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import BreedInfo from "./BreedInfo";
 import {DogDataContext} from './context/DogDataContext'
+// import {useSubId} from './context/SubIdContext'
+import VoteButton from "./VoteButton";
 
 const DogCard = () => {
-  // const [dogData, setDogData] = useState([]);
-  const subId = "randomUser1"
   const [breedInfo, setBreedInfo] = useState(null);
   const [favoriteStatus, setFavoriteStatus] = useState({});
-  const {dogData, setDogData} = useContext(DogDataContext);
+  const {dogData, setDogData, imageId} = useContext(DogDataContext);
+  const subId = 'randomuser1'
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, []);
+
+  console.log(dogData)
+  console.log(imageId)
 
   const fetchData = () => {
     axios.get(`https://api.thedogapi.com/v1/images/search?format=json&limit=10&`, {
@@ -21,7 +26,8 @@ const DogCard = () => {
         "x-api-key": 'live_4rGYISEvfuqFXkGte9Eg7EYoB2hqfqhRLY9fndfj9j7zkZlJWgHhfzSa9rgIruYP',
       }
     })
-    .then(response => setDogData(response.data))
+    .then(response => {setDogData(response.data)
+    })
     .catch(error => console.error("Error during fetching:", error));
   };
 
@@ -41,6 +47,7 @@ const DogCard = () => {
       ...prevState,
       [dogId]: true
     }));
+    
     console.log(dogId);
 
     axios.post("https://api.thedogapi.com/v1/favourites", data, {
@@ -76,6 +83,8 @@ const DogCard = () => {
               <button className="grid-button" onClick={() => onClickShowInfo(dog.breeds)}>
                 <span>Breed Info</span>
               </button>
+              <VoteButton dogId={dog.id} value={1}/>
+              <VoteButton dogId={dog.id} value={0}/>
             </div>
           </div>
         ))}
